@@ -5,6 +5,7 @@ module ForemanNotificationSend
     engine_name 'foreman_notification_send'
 
     config.autoload_paths += Dir["#{config.root}/app/models/concerns"]
+    config.autoload_paths += Dir["#{config.root}/app/services"]
 
     initializer 'foreman_ipxe.load_default_settings', before: :load_config_initializers do
       require_dependency File.expand_path('../../app/models/setting/notification_send.rb', __dir__) if \
