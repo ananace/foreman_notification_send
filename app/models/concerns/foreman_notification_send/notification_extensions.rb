@@ -8,10 +8,18 @@ module ForemanNotificationSend
     end
 
     def send_notification
-      return unless Setting[:notification_send_enable]
+      if Setting[:notification_send_enable]
+        sender = SenderBase.create_sender(
+          backend: :matrix,
+          hs_url: Setting[:notification_send_target_url],
+          access_token: Setting[:notification_send_token],
+          room: Setting[:notification_send_target_room]
+        )
+        sender.send_notification(self)
+      end
 
-      sender = SenderBase.create_sender
-      sender.send_notification(self)
+      NotificationTarget.select { |target| target.should_send?(self) }
+                        .each { |target| target.send(self) }
     end
 
     def level_to_symbol
