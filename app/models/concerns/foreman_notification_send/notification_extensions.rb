@@ -17,7 +17,7 @@ module ForemanNotificationSend
     def level_to_symbol
       case notification_blueprint.level
       when 'success'
-        '✔️'
+        '✅'
       when 'info'
         'ℹ️'
       when 'warning'
