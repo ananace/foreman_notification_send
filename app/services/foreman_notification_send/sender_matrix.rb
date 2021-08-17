@@ -4,7 +4,8 @@ require 'matrix_sdk/api'
 module ForemanNotificationSend
   class SenderMatrix < SenderBase
     def initialize(hs_url:, access_token:, room:, msgtype: 'm.notice')
-      raise ArgumentError, 'access_token must be a Matrix room ID/Alias' unless access_token.is_a?(MXID) && access_token.room?
+      room = MatrixSdk::MXID.new room unless room.is_a?(MatrixSdk::MXID) 
+      raise ArgumentError, 'room must be a Matrix room ID/Alias' unless room.room?
 
       @hs_url = hs_url
       @access_token = access_token

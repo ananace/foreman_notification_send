@@ -18,8 +18,10 @@ module ForemanNotificationSend
         sender.send_notification(self)
       end
 
-      NotificationTarget.select { |target| target.should_send?(self) }
-                        .each { |target| target.send(self) }
+      #NotificationTarget.select { |target| target.should_send?(self) }
+      #                  .each { |target| target.send(self) }
+    rescue StandardError => ex
+      Foreman::Logging.exception "Failed to send notification #{self}", ex
     end
 
     def level_to_symbol
