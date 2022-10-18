@@ -7,6 +7,12 @@ module ForemanNotificationSend
     config.autoload_paths += Dir["#{config.root}/app/models/concerns"]
     config.autoload_paths += Dir["#{config.root}/app/services"]
 
+    initializer 'foreman_notification_send.load_app_instance_data' do |app|
+      ForemanNotificationSend::Engine.paths['db/migrate'].existent.each do |path|
+        app.config.paths['db/migrate'] << path
+      end
+    end
+
     initializer 'foreman_ipxe.load_default_settings', before: :load_config_initializers do
       require_dependency File.expand_path('../../app/models/setting/notification_send.rb', __dir__) if \
         begin
@@ -23,11 +29,9 @@ module ForemanNotificationSend
     end
 
     config.to_prepare do
-      begin
-        Notification.send(:prepend, ForemanNotificationSend::NotificationExtensions)
-      rescue StandardError => e
-        Rails.logger.fatal "foreman_notification_send: skipping engine hook (#{e})"
-      end
+      Notification.prepend ForemanNotificationSend::NotificationExtensions
+    rescue StandardError => e
+      Rails.logger.fatal "foreman_notification_send: skipping engine hook (#{e})"
     end
   end
 end

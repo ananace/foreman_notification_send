@@ -10,7 +10,7 @@ module ForemanNotificationSend
     def should_send?(notification)
       # TODO: Filter
     end
-    
+
     def send(notification)
       sender = SenderBase.create_sender(configuration.deep_symbolize_keys.merge(backend: slugify_backend))
       sender.send_notification(notification)
