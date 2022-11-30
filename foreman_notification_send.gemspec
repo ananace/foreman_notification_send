@@ -2,23 +2,23 @@
 
 require File.join File.expand_path('lib', __dir__), 'foreman_notification_send/version'
 
-Gem::Specification.new do |s|
-  s.name        = 'foreman_notification_send'
-  s.version     = ForemanNotificationSend::VERSION
-  s.authors     = ['Alexander Olofsson']
-  s.email       = ['alexander.olofsson@liu.se']
+Gem::Specification.new do |spec|
+  spec.name        = 'foreman_notification_send'
+  spec.version     = ForemanNotificationSend::VERSION
+  spec.authors     = ['Alexander Olofsson']
+  spec.email       = ['alexander.olofsson@liu.se']
 
-  s.homepage    = 'https://github.com/ananace/foreman_notification_send'
-  s.summary     = 'Send Foreman notifications to external systems'
-  s.description = s.summary
-  s.license     = 'GPL-3.0'
+  spec.homepage    = 'https://github.com/ananace/foreman_notification_send'
+  spec.summary     = 'Send Foreman notifications to external systems'
+  spec.description = spec.summary
+  spec.license     = 'GPL-3.0'
 
-  s.files         = Dir['{app,config,db,lib}/**/*.{rake,rb}'] + %w[LICENSE.txt README.md]
-  s.require_paths = ['lib']
+  spec.files       = Dir['{app,config,db,lib}/**/*.{rake,rb}'] + %w[LICENSE.txt README.md]
 
-  s.add_dependency 'matrix_sdk', '~> 2.6'
+  spec.add_dependency 'matrix_sdk', '~> 2.6'
 
-  s.add_development_dependency 'bundler'
-  s.add_development_dependency 'minitest'
-  s.add_development_dependency 'rake'
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rubocop-minitest'
+  spec.add_development_dependency 'rubocop-performance'
+  spec.add_development_dependency 'rubocop-rails'
 end
