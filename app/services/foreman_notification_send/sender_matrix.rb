@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'matrix_sdk/api'
 
 module ForemanNotificationSend

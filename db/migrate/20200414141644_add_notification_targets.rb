@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddNotificationTargets < ActiveRecord::Migration[5.1]
   def change
     create_table :notification_targets do |t|
@@ -11,4 +13,3 @@ class AddNotificationTargets < ActiveRecord::Migration[5.1]
     end
   end
 end
-

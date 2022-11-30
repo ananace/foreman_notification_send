@@ -3,7 +3,7 @@
 module ForemanNotificationSend
   class NotificationTarget < ApplicationRecord
     before_validation do
-      backend = slugify_backend if backend
+      # backend = slugify_backend if backend
     end
     validate :validate_backend
 
