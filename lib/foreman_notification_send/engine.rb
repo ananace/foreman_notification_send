@@ -13,6 +13,7 @@ module ForemanNotificationSend
       end
     end
 
+    # rubocop:disable Metrics/BlockLength
     initializer 'foreman_notification_send.register_plugin', before: :finisher_hook do |_app|
       Foreman::Plugin.register :foreman_notification_send do
         requires_foreman '>= 3.0'
@@ -46,6 +47,7 @@ module ForemanNotificationSend
         end
       end
     end
+    # rubocop:enable Metrics/BlockLength
 
     config.to_prepare do
       Notification.prepend ForemanNotificationSend::NotificationExtensions
